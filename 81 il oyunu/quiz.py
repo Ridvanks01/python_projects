@@ -2,7 +2,7 @@ import random
 
 pattern = "-------------------------------------------------"
 
-answers = ["Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"]
+cities = ["Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"]
 
 trues = 0
 falses = 0
@@ -22,41 +22,84 @@ while True:
             
             randomNumber = random.randint(1,81)
             
-            option1 = answers[random.randint(0,80)]
-            option2 = answers[randomNumber-1]
+            option1 = cities[randomNumber-1]
+            option2 = cities[random.randint(0,80)]
+            
+            while option1 == option2:
+                
+                option2 = cities[random.randint(0,80)]
+                
+                if option1 != option2:
+                    
+                    break
+                        
+            
+            optionOrder = random.randint(1,2)            
             
             while True:
                 
                 print(pattern + "\n\n" + str(i + 1) + ".Soru: " + str(randomNumber) + " Plaka kodlu ilimiz aşağıdakilerden hangisidir?\n")
             
-                answer = input("A." + option1 + "\n" + "B." + option2 + "\n\nCevabınız: ")
-            
-                if answer == "A" or answer == "a":
-                    print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + answers[randomNumber - 1])
+                if optionOrder == 1:
                     
-                    falses = falses + 1
+                    answer = input("A." + option1 + "\n" + "B." + option2 + "\n\nCevabınız: ")
                     
-                    break
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
                 
-                elif answer == "B" or answer == "b":
-                    print("\n" + "Doğru Cevap!")
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
                     
-                    trues = trues + 1
+                        falses = falses + 1
                     
-                    break
+                        break
                 
-                elif answer == "0":
+                    elif answer == "0":
                 
-                    print("Oyun Bitti...\n")
+                        print("Oyun Bitti...\n")
         
-                    quit
-                    break
-                
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")   
+                    
                 else:
-                    print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")     
+                    
+                    answer = input("A." + option2 + "\n" + "B." + option1 + "\n\nCevabınız: ")
+                    
+                    if answer == "A" or answer == "a":
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                    elif answer == "B" or answer == "b":
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
+                
+                    elif answer == "0":
+                
+                        print("Oyun Bitti...\n")
+        
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*") 
          
-        print("\nDoğru Sayısı: " + str(trues))
-        print("Yanlış Sayısı: " + str(falses))
+        print(pattern + "\nDoğru Sayısı: " + str(trues))
+        print("Yanlış Sayısı: " + str(falses) + "\n" + pattern)
                    
         break
                 
@@ -69,49 +112,146 @@ while True:
             
             randomNumber = random.randint(1,81)
             
-            option1 = answers[random.randint(0,80)]
-            option2 = answers[random.randint(0,80)]
-            option3 = answers[randomNumber-1]
+            option1 = cities[randomNumber-1]
+            option2 = cities[random.randint(0,80)]
+            option3 = cities[random.randint(0,80)]
+            
+            while option1 == option2 or option1 == option3 or option2 == option3:
+                
+                option2 = cities[random.randint(0,80)]
+                option3 = cities[random.randint(0,80)]
+                
+                if option1 != option2 and option1 != option3 and option2 != option3:
+                    
+                    break
+            
+            optionOrder = random.randint(1,3) 
+            
             
             while True:
                 
                 print(pattern + "\n\n" + str(i + 1) + ".Soru: " + str(randomNumber) + " Plaka kodlu ilimiz aşağıdakilerden hangisidir?\n")
-            
-                answer = input("A." + option1 + "\n" + "B." + option2 + "\n" + "C." + option3 + "\n\nCevabınız: ")
-            
-                if answer == "A" or answer == "a":
-                    print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + answers[randomNumber - 1])
-                    
-                    falses = falses + 1
-                    
-                    break
                 
-                elif answer == "B" or answer == "b":
-                    print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + answers[randomNumber - 1])
+                if optionOrder == 1:
                     
-                    falses = falses + 1
+                    answer = input("A." + option1 + "\n" + "B." + option2 + "\n" + "C." + option3 + "\n\nCevabınız: ")
                     
-                    break
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
                 
-                elif answer == "C" or answer == "c":
-                    print("\n" + "Doğru Cevap!")
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
                     
-                    trues = trues + 1
+                        falses = falses + 1
                     
-                    break
+                        break
+                    
+                    elif answer == "C" or answer == "c":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
                 
-                elif answer == "0":
+                    elif answer == "0":
                 
-                    print("Oyun Bitti...\n")
+                        print("Oyun Bitti...\n")
         
-                    quit
-                    break
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")   
+                    
+                    
+                elif optionOrder == 2:
+                    
+                    answer = input("A." + option2 + "\n" + "B." + option1 + "\n" + "C." + option3 + "\n\nCevabınız: ")
+                    
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
+                    
+                    elif answer == "C" or answer == "c":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                    elif answer == "0":
+                
+                        print("Oyun Bitti...\n")
+        
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")
+                
                 
                 else:
-                    print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")
+                    
+                    answer = input("A." + option2 + "\n" + "B." + option3 + "\n" + "C." + option1 + "\n\nCevabınız: ")
+                    
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                    
+                    elif answer == "C" or answer == "c":
+                        
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
+                
+                    elif answer == "0":
+                
+                        print("Oyun Bitti...\n")
+        
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")
+                        
                      
-        print("\nDoğru Sayısı: " + str(trues))
-        print("Yanlış Sayısı: " + str(falses))
+        print(pattern + "\nDoğru Sayısı: " + str(trues))
+        print("Yanlış Sayısı: " + str(falses) + "\n" + pattern)
               
         break
   
@@ -124,58 +264,220 @@ while True:
             
             randomNumber = random.randint(1,81)
             
-            option1 = answers[random.randint(0,80)]
-            option2 = answers[random.randint(0,80)]
-            option3 = answers[random.randint(0,80)]
-            option4 = answers[randomNumber-1]
+            option1 = cities[randomNumber-1]
+            option2 = cities[random.randint(0,80)]
+            option3 = cities[random.randint(0,80)]
+            option4 = cities[random.randint(0,80)]
+            
+            while option1 == option2 or option1 == option3 or option1 == option4 or option2 == option3 or option2 == option4 or option3 == option4:
+                
+                option2 = cities[random.randint(0,80)]
+                option3 = cities[random.randint(0,80)]
+                option4 = cities[random.randint(0,80)]
+                
+                if option1 != option2 and option1 != option3 and option1 != option4 and option2 != option3 and option2 != option4 and option3 != option4:
+                    
+                    break
+            
+            optionOrder = random.randint(1,4)
             
             while True:
                 
                 print(pattern + "\n\n" + str(i + 1) + ".Soru: " + str(randomNumber) + " Plaka kodlu ilimiz aşağıdakilerden hangisidir?\n")
             
-                answer = input("A." + option1 + "\n" + "B." + option2 + "\n" + "C." + option3 + "\n" + "D." + option4 + "\n\nCevabınız: ")
-            
-                if answer == "A" or answer == "a":
-                    print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + answers[randomNumber - 1])
+                if optionOrder == 1:
                     
-                    falses = falses + 1
+                    answer = input("A." + option1 + "\n" + "B." + option2 + "\n" + "C." + option3 + "\n" + "D." + option4 + "\n\nCevabınız: ")
                     
-                    break
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
                 
-                elif answer == "B" or answer == "b":
-                    print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + answers[randomNumber - 1])
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
                     
-                    falses = falses + 1
+                        falses = falses + 1
                     
-                    break
+                        break
+                    
+                    elif answer == "C" or answer == "c":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                    
+                    elif answer == "D" or answer == "d":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
                 
-                elif answer == "C" or answer == "c":
-                    print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + answers[randomNumber - 1])
-                    
-                    falses = falses + 1
-                    
-                    break
-            
-                elif answer == "D" or answer == "d":
-                    print("\n" + "Doğru Cevap!")
-                    
-                    trues = trues + 1
-                    
-                    break
+                    elif answer == "0":
                 
-                elif answer == "0":
+                        print("Oyun Bitti...\n")
+        
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")   
+                    
+                    
+                elif optionOrder == 2:
+                    
+                    answer = input("A." + option2 + "\n" + "B." + option1 + "\n" + "C." + option3 + "\n" + "D." + option4 + "\n\nCevabınız: ")
+                    
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
                 
-                    print("Oyun Bitti...\n")
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
+                    
+                    elif answer == "C" or answer == "c":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
                 
-                    quit    
+                    elif answer == "D" or answer == "d":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
                 
-                    break
+                        
+                    elif answer == "0":
+                
+                        print("Oyun Bitti...\n")
+        
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")
+                        
+                
+                elif optionOrder == 3:
+                    
+                    answer = input("A." + option2 + "\n" + "B." + option3 + "\n" + "C." + option1 + "\n" + "D." + option4 + "\n\nCevabınız: ")
+                    
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                    
+                    elif answer == "C" or answer == "c":
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
+                
+                    elif answer == "D" or answer == "d":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                        
+                    elif answer == "0":
+                
+                        print("Oyun Bitti...\n")
+        
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")
+                
                 
                 else:
-                    print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")    
+                    
+                    answer = input("A." + option2 + "\n" + "B." + option3 + "\n" + "C." + option4 + "\n" + "D." + option1 + "\n\nCevabınız: ")
+                    
+                    if answer == "A" or answer == "a":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                    elif answer == "B" or answer == "b":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                    
+                    elif answer == "C" or answer == "c":
+                        
+                        print("\n" + "Yanlış Cevap! " + str(randomNumber) + " plaka kodlu ilimiz " + cities[randomNumber - 1])
+                    
+                        falses = falses + 1
+                    
+                        break
+                
+                    elif answer == "D" or answer == "d":
+                        
+                        print("\n" + "Doğru Cevap!")
+                    
+                        trues = trues + 1
+                    
+                        break
+                
+                        
+                    elif answer == "0":
+                
+                        print("Oyun Bitti...\n")
+        
+                        quit
+                        break
+                    
+                    else:
+                        print(pattern + "\n*Lütfen Geçerli Bir Cevap Giriniz!*")
+                        
             
-        print("\nDoğru Sayısı: " + str(trues))
-        print("Yanlış Sayısı: " + str(falses))
+        print(pattern + "\nDoğru Sayısı: " + str(trues))
+        print("Yanlış Sayısı: " + str(falses) + "\n" + pattern)
                 
         break
         
